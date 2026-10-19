@@ -1,4 +1,12 @@
-node_modules
-dist
+node_modules/
+dist/
+*.log
 *.local
+.vite/
 .DS_Store
+
+# User-supplied assets (NASA textures, music) stay out of the repository
+public/textures/*
+!public/textures/README.md
+public/audio/*
+!public/audio/README.md

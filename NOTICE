@@ -1,0 +1,12 @@
+The Waiting Moon (待つ月：45億年の片思い)
+Copyright 2026 FutureCortex Labs
+
+This product includes software developed at FutureCortex Labs.
+
+Third-party libraries bundled into the built page:
+  three.js  (MIT licence)
+  GSAP      (Standard "No Charge" GreenSock licence)
+  lil-gui   (MIT licence, shown only with ?debug)
+
+The optional Earth textures (NASA Blue Marble / Black Marble) and the music
+are not included in this repository. See public/textures/ and public/audio/.
