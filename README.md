@@ -152,7 +152,7 @@ Only boots and gloves appear. No faces, no bodies.
 
 ## Verification
 
-Checked in Chromium (the Claude desktop app's built-in browser) on an NVIDIA RTX PRO 6000:
+Checked in Chromium (the Claude desktop app's built-in browser):
 
 - `npm run typecheck` and `npm run build` pass.
 - Every scene was rendered and inspected at several times.
