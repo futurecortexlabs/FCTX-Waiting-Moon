@@ -151,7 +151,7 @@ Vite + TypeScript + Three.js r180。作品全体を GSAP のタイムライン1�
 
 ## 検証
 
-Chromium（Claude デスクトップアプリ内蔵ブラウザ）、NVIDIA RTX PRO 6000 で確認しました。
+Chromium（Claude デスクトップアプリ内蔵ブラウザ）で確認しました。
 
 - `npm run typecheck` と `npm run build` が通ること。
 - すべてのシーンを、いくつかの時刻で描いて目で確認したこと。
