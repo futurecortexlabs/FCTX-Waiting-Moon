@@ -8,5 +8,12 @@ Third-party libraries bundled into the built page:
   GSAP      (Standard "No Charge" GreenSock licence)
   lil-gui   (MIT licence, shown only with ?debug)
 
-The optional Earth textures (NASA Blue Marble / Black Marble) and the music
-are not included in this repository. See public/textures/ and public/audio/.
+Earth textures (public/textures/):
+  Blue Marble: Next Generation and Black Marble 2016, courtesy NASA Earth
+  Observatory. NASA imagery is not subject to copyright in the United States.
+  earth_night.jpg is a reduced and filtered copy of Black Marble 2016.
+
+Music (public/audio/music.mp3):
+  Original score synthesised by scripts/compose.mjs. No third-party audio.
+  The MP3 encoder (@breezystack/lamejs, LGPL-3.0) is used only at build time
+  by that script and is not part of the published page.

@@ -66,7 +66,7 @@
 
 ## 観る
 
-- **オンライン**：[futurecortexlabs.github.io/FCTX-Waiting-Moon](https://futurecortexlabs.github.io/FCTX-Waiting-Moon/)。公開版には NASA のテクスチャと音楽が入っていないので（[素材](#素材任意)を参照）、地球は手続き生成で描かれ、音は鳴りません。
+- **オンライン**：[futurecortexlabs.github.io/FCTX-Waiting-Moon](https://futurecortexlabs.github.io/FCTX-Waiting-Moon/)。NASA のテクスチャと音楽もリポジトリに入っているので、公開版でもそのまま完全版が観られます。
 - **手元で**：Node.js 24 が必要です（[`.nvmrc`](.nvmrc)）。
 
   ```bash
@@ -93,15 +93,15 @@
 
 シーン名：`birth`（0:00）、`lock`（0:50）、`watch`（1:40）、`spark`（2:30）、`footprint`（3:30）、`remain`（4:20）
 
-### 素材（任意）
+### 素材
 
-どちらもリポジトリには入っていません。無くても最後まで再生されます。
+3つともリポジトリに入っています。無くても最後まで再生されます（地球は手続き生成になり、音は鳴りません）。
 
 | 置き場所 | 内容 |
 |:--|:--|
-| `public/textures/earth_day.jpg` | NASA Blue Marble（正距円筒図法 2:1）。現代の地球に使う |
-| `public/textures/earth_night.jpg` | NASA Black Marble。夜側の都市の光 |
-| `public/audio/music.mp3` | 5分の音楽（`.ogg` / `.m4a` も可）。鳴っている間は、その再生位置が作品の時計になる |
+| `public/textures/earth_day.jpg` | NASA Blue Marble: Next Generation（2004年12月、5400×2700）。現代の地球に使う |
+| `public/textures/earth_night.jpg` | NASA Black Marble 2016 を 5400×2700 に縮め、陸の地色を落として光だけを残したもの。夜側の都市の光 |
+| `public/audio/music.mp3` | 5分の音楽。[`scripts/compose.mjs`](scripts/compose.mjs) で合成（`npm run music`）。鳴っている間は、その再生位置が作品の時計になる |
 
 詳しくは [`public/textures/README.md`](public/textures/README.md) と [`public/audio/README.md`](public/audio/README.md) にあります。
 
@@ -156,6 +156,8 @@ Chromium（Claude デスクトップアプリ内蔵ブラウザ）、NVIDIA RTX 
 - `npm run typecheck` と `npm run build` が通ること。
 - すべてのシーンを、いくつかの時刻で描いて目で確認したこと。
 - 作品全体を 0〜300秒まで 0.1秒刻みで2回通し、すべてのシーンの境目をまたいでも例外が出ないこと。
+- NASA のテクスチャと音楽を入れた状態で、0〜300秒を実時間で1回通して再生したこと（音楽が時計）。すべてのシーンが予定どおりに切り替わり、フレームレートは最低 59fps（月面ステージへの最初の切り替えを含む）、映像と音楽のずれは 21ms 以内で、タイトルまでコンソールエラーなしで終わること。
+- 音楽の波形とスペクトログラムを確認し、音割れとクリックノイズが無いこと。
 
 この README のスクリーンショットは、そのときに撮ったものです。自動テストはありません。
 
@@ -175,10 +177,7 @@ Chromium（Claude デスクトップアプリ内蔵ブラウザ）、NVIDIA RTX 
 
 - **月面ステージへの最初の切り替えで一度だけ止まる。** 2:30 の時点で、上の GPU で約 0.2秒。画面が真っ黒な間です。音楽が鳴っていれば、そのあと映像が音楽に追いつきます。
 - **向き合う・見守るで見える月の地面は、近くで見ると柔らかい。** クレーターは球に手続き生成で凹凸の陰影をつけたもので、形状ではありません。
-- **テクスチャが無いと、現代の地球も手続き生成になる。** `earth_day.jpg` を置くまで、実際の大陸の形にはなりません。
 - **音を出すには一度クリックかキー入力が要る。** ブラウザの自動再生の決まりです。
-- **公開版は無音で、NASA のテクスチャも無い。** どちらもリポジトリに入っていないためです。
-- **このリポジトリの確認では、実時間で通しては観ていない。** 通しの確認はフレームを刻んで進めたものです（[検証](#検証)を参照）。
 
 ---
 
@@ -191,7 +190,8 @@ Chromium（Claude デスクトップアプリ内蔵ブラウザ）、NVIDIA RTX 
 | [`src/scenes/`](src/scenes) | `birth`、`lock`、`watch`、`spark`、`footprint`、`remain`。それぞれ `setup()`、`update(t)`、`dispose()` を持つ |
 | [`src/world/`](src/world) | 地球、月、2つのステージ、地形、足跡の区画、着陸船、ブーツと手袋、砂煙、星 |
 | [`src/shaders/`](src/shaders) | シンプレックスノイズと、月面で共有するレゴリスの陰影 |
-| [`public/`](public) | 任意のテクスチャと音楽の置き場所 |
+| [`public/`](public) | NASA のテクスチャと音楽 |
+| [`scripts/compose.mjs`](scripts/compose.mjs) | 音楽を作曲・合成して `public/audio/music.mp3` に書き出す |
 | [`docs/media/`](docs/media) | この README のスクリーンショット |
 | [`CLAUDE.md`](CLAUDE.md) | 制作仕様書 |
 | [`README.md`](README.md) | この README の英語版 |

@@ -67,7 +67,7 @@ The only words on screen are the last line and the title:
 
 ## Watch it
 
-- **Online:** [futurecortexlabs.github.io/FCTX-Waiting-Moon](https://futurecortexlabs.github.io/FCTX-Waiting-Moon/). The hosted copy has no NASA textures or music (see [Assets](#assets-optional)), so the Earth is drawn procedurally and the film is silent.
+- **Online:** [futurecortexlabs.github.io/FCTX-Waiting-Moon](https://futurecortexlabs.github.io/FCTX-Waiting-Moon/). The NASA textures and the score are in the repository, so the hosted copy is the full film.
 - **Locally:** needs Node.js 24 ([`.nvmrc`](.nvmrc)).
 
   ```bash
@@ -94,15 +94,15 @@ It starts by itself and plays to the end. Browsers only allow sound after a user
 
 Scene names: `birth` (0:00), `lock` (0:50), `watch` (1:40), `spark` (2:30), `footprint` (3:30), `remain` (4:20).
 
-### Assets (optional)
+### Assets
 
-Neither is in the repository, and the film plays to the end without them.
+All three are in the repository. The film still plays to the end without them: the Earth falls back to procedural shading and the film runs silent.
 
 | Path | What |
 |:--|:--|
-| `public/textures/earth_day.jpg` | NASA Blue Marble (equirectangular, 2:1). Used for the modern Earth |
-| `public/textures/earth_night.jpg` | NASA Black Marble. City lights on the night side |
-| `public/audio/music.mp3` | A five-minute score (`.ogg` / `.m4a` also work). While it plays, its position is the film's clock |
+| `public/textures/earth_day.jpg` | NASA Blue Marble: Next Generation, December 2004 (5400×2700). Used for the modern Earth |
+| `public/textures/earth_night.jpg` | NASA Black Marble 2016, reduced to 5400×2700 with the land background removed so only the lights remain. City lights on the night side |
+| `public/audio/music.mp3` | The five-minute score, synthesised by [`scripts/compose.mjs`](scripts/compose.mjs) (`npm run music`). While it plays, its position is the film's clock |
 
 Details in [`public/textures/README.md`](public/textures/README.md) and [`public/audio/README.md`](public/audio/README.md).
 
@@ -157,6 +157,8 @@ Checked in Chromium (the Claude desktop app's built-in browser) on an NVIDIA RTX
 - `npm run typecheck` and `npm run build` pass.
 - Every scene was rendered and inspected at several times.
 - The whole film was stepped from 0 to 300 s at 0.1 s steps, twice, crossing every scene boundary, with no exceptions.
+- With the NASA textures and the score in place, the film was played once from 0 to 300 s in real time, with the music as the clock. Every scene switched on time, the frame rate never fell below 59 fps (including the first switch to the lunar surface), the picture stayed within 21 ms of the music, and it ended on the title with no console errors.
+- The score was checked as a waveform and spectrogram: no clipping and no clicks.
 
 The screenshots in this README come from that check. There is no automated test suite.
 
@@ -176,10 +178,7 @@ The screenshots in this README come from that check. There is no automated test 
 
 - **The first switch to the lunar surface stalls once.** At 2:30, roughly 0.2 s on the GPU above, while the screen is fully black. With music playing, the picture catches up to the music afterwards.
 - **The Moon's ground is soft up close in Facing and Watching.** The craters are procedural bump shading on a sphere, not geometry.
-- **Without textures the modern Earth is procedural.** It does not show real continents until `earth_day.jpg` is added.
 - **Sound needs one click or key press.** That is the browser's autoplay rule.
-- **The online copy is silent and has no NASA textures.** They are not in the repository.
-- **It has not been watched end to end in real time in this repository's checks.** The full run was stepped frame by frame (see [Verification](#verification)).
 
 ---
 
@@ -192,7 +191,8 @@ The screenshots in this README come from that check. There is no automated test 
 | [`src/scenes/`](src/scenes) | `birth`, `lock`, `watch`, `spark`, `footprint`, `remain`, each with `setup()`, `update(t)` and `dispose()` |
 | [`src/world/`](src/world) | Earth, Moon, the two stages, terrain, footprint patch, lander, boots and gloves, dust, stars |
 | [`src/shaders/`](src/shaders) | Simplex noise and the shared regolith shading |
-| [`public/`](public) | Where the optional textures and music go |
+| [`public/`](public) | NASA textures and the score |
+| [`scripts/compose.mjs`](scripts/compose.mjs) | Composes and renders the score to `public/audio/music.mp3` |
 | [`docs/media/`](docs/media) | The screenshots used in this README |
 | [`CLAUDE.md`](CLAUDE.md) | The production spec (Japanese) |
 | [`README.ja.md`](README.ja.md) | This README in Japanese |
